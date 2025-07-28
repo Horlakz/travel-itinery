@@ -4,7 +4,7 @@ import { useGlobalContext } from "@/providers/global.context";
 import { generateId } from "../plan.constant";
 
 function FlightCreate() {
-  const { addFlight } = useGlobalContext();
+  const { addFlight, setModalVisibility } = useGlobalContext();
 
   const [form, setForm] = useState({
     id: generateId(),
@@ -227,6 +227,7 @@ function FlightCreate() {
             onClick={(e) => {
               e.preventDefault();
               addFlight(form);
+              setModalVisibility(false);
             }}
           >
             Create Flight

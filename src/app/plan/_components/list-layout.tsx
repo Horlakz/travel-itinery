@@ -2,25 +2,24 @@
 
 import classNames from "classnames";
 import Image from "next/image";
-import { Fragment, JSX, useState } from "react";
+import { Fragment, JSX } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
+import { useGlobalContext } from "@/providers/global.context";
 import { ListLayoutProps } from "../../home.interface";
 import ActivitiesEmptyIcon from "../_icons/activity-empty";
 import FlightEmptyIcon from "../_icons/flight-empty";
 import HotelEmptyIcon from "../_icons/hotel-empty";
-import { createComponents } from "../plan.constant";
-import HotelCreate from "./hotel-create";
+import { PlanCard } from "../plan.interface";
 
-const emptyIcons: Record<"activities" | "hotels" | "flights", JSX.Element> = {
+const emptyIcons: Record<PlanCard, JSX.Element> = {
   activities: <ActivitiesEmptyIcon />,
   hotels: <HotelEmptyIcon />,
   flights: <FlightEmptyIcon />,
 };
 
 function ListLayout<T>(props: ListLayoutProps<T>) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { setModalVisibility, setType } = useGlobalContext();
 
   return (
     <>
@@ -35,18 +34,22 @@ function ListLayout<T>(props: ListLayoutProps<T>) {
               className="w-6 h-6"
             />
             <span
-              className={
+              className={classNames(
+                "capitalize",
                 props.bgColor === "bg-neutral-300" ? "text-black" : "text-white"
-              }
+              )}
             >
               {props.title}
             </span>
           </div>
 
           <Button
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setModalVisibility(true);
+              setType(props.title);
+            }}
             className={classNames(
-              "bg-white text-sm rounded p-2",
+              "bg-white text-sm rounded p-2 capitalize",
               props.btnTextColor ?? "text-black"
             )}
           >
@@ -56,14 +59,15 @@ function ListLayout<T>(props: ListLayoutProps<T>) {
 
         {props.data.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 bg-white">
-            {emptyIcons[
-              props.title.toLowerCase() as keyof typeof emptyIcons
-            ] ?? <FlightEmptyIcon />}
+            {emptyIcons[props.title] ?? <FlightEmptyIcon />}
             <span className="mb-4">No Request yet.</span>
             <Button
-              onClick={() => setIsOpen(true)}
+              onClick={() => {
+                setModalVisibility(true);
+                setType(props.title);
+              }}
               className={classNames(
-                "bg-primary-600 text-white text-sm flex-center rounded p-2 w-32"
+                "bg-primary-600 text-white text-sm flex-center rounded p-2 w-32 capitalize"
               )}
             >
               Add {props.title}
@@ -75,20 +79,6 @@ function ListLayout<T>(props: ListLayoutProps<T>) {
           ))
         )}
       </div>
-
-      <Modal
-        visibility={isOpen}
-        setVisibility={() => setIsOpen(false)}
-        showCloseButton
-      >
-        {(() => {
-          const Component =
-            createComponents[
-              props.title.toLowerCase() as keyof typeof createComponents
-            ] ?? HotelCreate;
-          return <Component />;
-        })()}
-      </Modal>
     </>
   );
 }

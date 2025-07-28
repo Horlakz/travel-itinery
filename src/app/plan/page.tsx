@@ -10,6 +10,7 @@ import { useGlobalContext } from "@/providers/global.context";
 import Image from "next/image";
 import ActivityCard from "./_components/activity-card";
 import FlightCard from "./_components/flight-card";
+import PlanCreateModal from "./_components/PlanCreateModal";
 
 function PlanPage() {
   const { hotels, activities, flights } = useGlobalContext();
@@ -29,7 +30,7 @@ function PlanPage() {
         <div className="w-full flex justify-between items-start">
           <div className="md:flex hidden items-start gap-2">
             <InfoCard
-              title="Activites"
+              title="activities"
               description="Build, personalize, and optimize your itineraries with our trip planner."
               theme={{
                 bg: "bg-primary-1100",
@@ -40,7 +41,7 @@ function PlanPage() {
             />
 
             <InfoCard
-              title="Hotels"
+              title="hotels"
               description="Build, personalize, and optimize your itineraries with our trip planner."
               theme={{
                 bg: "bg-primary-100",
@@ -51,7 +52,7 @@ function PlanPage() {
             />
 
             <InfoCard
-              title="Flights"
+              title="flights"
               description="Build, personalize, and optimize your itineraries with our trip planner."
               theme={{
                 bg: "bg-primary-600",
@@ -91,7 +92,7 @@ function PlanPage() {
         </div>
 
         <ListLayout
-          title="Flights"
+          title="flights"
           href="/flights"
           icon="/assets/airplaneinflight.svg"
           bgColor="bg-neutral-300"
@@ -101,7 +102,7 @@ function PlanPage() {
         />
 
         <ListLayout
-          title="Hotels"
+          title="hotels"
           href="/hotels"
           icon="/assets/warehouse.svg"
           bgColor="bg-neutral-900"
@@ -111,7 +112,7 @@ function PlanPage() {
         />
 
         <ListLayout
-          title="Activities"
+          title="activities"
           href="/activities"
           icon="/assets/roadhorizon-1.svg"
           bgColor="bg-primary-700"
@@ -120,6 +121,8 @@ function PlanPage() {
           listItem={(data) => <ActivityCard {...data} />}
         />
       </div>
+
+      <PlanCreateModal />
     </>
   );
 }

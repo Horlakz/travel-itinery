@@ -3,7 +3,7 @@ import { useState } from "react";
 import { generateId } from "../plan.constant";
 
 function HotelCreate() {
-  const { addHotel } = useGlobalContext();
+  const { addHotel, setModalVisibility } = useGlobalContext();
 
   const INITIAL_FORM = {
     id: generateId(),
@@ -207,6 +207,7 @@ function HotelCreate() {
               e.preventDefault();
               addHotel(form);
               setForm(INITIAL_FORM);
+              setModalVisibility(false);
             }}
           >
             Create Hotel

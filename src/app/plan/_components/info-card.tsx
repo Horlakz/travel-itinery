@@ -2,14 +2,11 @@
 
 import classNames from "classnames";
 
-import { Modal } from "@/components/ui/modal";
-import { useState } from "react";
+import { useGlobalContext } from "@/providers/global.context";
 import { InfoCardProps } from "../../home.interface";
-import { createComponents } from "../plan.constant";
-import HotelCreate from "./hotel-create";
 
 function InfoCard(props: InfoCardProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { setModalVisibility, setType } = useGlobalContext();
 
   return (
     <>
@@ -20,12 +17,15 @@ function InfoCard(props: InfoCardProps) {
           props.theme.text
         )}
       >
-        <p className="font-semibold">{props.title}</p>
+        <p className="font-semibold capitalize">{props.title}</p>
         <p className="text-sm pb-4">{props.description}</p>
         <button
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            setModalVisibility(true);
+            setType(props.title);
+          }}
           className={classNames(
-            "w-full text-sm rounded p-2",
+            "w-full text-sm rounded p-2 capitalize",
             props.theme.buttonBg,
             props.theme.buttonTextColor
           )}
@@ -33,19 +33,6 @@ function InfoCard(props: InfoCardProps) {
           Add {props.title}
         </button>
       </div>
-      <Modal
-        visibility={isOpen}
-        setVisibility={() => setIsOpen(false)}
-        showCloseButton
-      >
-        {(() => {
-          const Component =
-            createComponents[
-              props.title.toLowerCase() as keyof typeof createComponents
-            ] ?? HotelCreate;
-          return <Component />;
-        })()}
-      </Modal>
     </>
   );
 }

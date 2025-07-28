@@ -1,9 +1,10 @@
-import { useGlobalContext } from "@/providers/global.context";
 import { useState } from "react";
+
+import { useGlobalContext } from "@/providers/global.context";
 import { generateId } from "../plan.constant";
 
 function ActivityCreate() {
-  const { addActivity } = useGlobalContext();
+  const { addActivity, setModalVisibility } = useGlobalContext();
 
   const INITIAL_FORM = {
     id: generateId(),
@@ -192,6 +193,7 @@ function ActivityCreate() {
               e.preventDefault();
               addActivity(form);
               setForm(INITIAL_FORM);
+              setModalVisibility(false);
             }}
           >
             Create Activity

@@ -3,15 +3,21 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 import {
-  ActivityCardProps,
-  FlightCardProps,
-  HotelCardProps,
+    ActivityCardProps,
+    FlightCardProps,
+    HotelCardProps,
+    PlanCard,
 } from "@/app/plan/plan.interface";
 
 interface GlobalContextType {
   hotels: HotelCardProps[];
   activities: ActivityCardProps[];
   flights: FlightCardProps[];
+  modalVisibility: boolean;
+  type: PlanCard;
+
+  setModalVisibility: (isVisible: boolean) => void;
+  setType: (type: PlanCard) => void;
 
   addHotel: (hotel: HotelCardProps) => void;
   addActivity: (activity: ActivityCardProps) => void;
@@ -28,6 +34,8 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [hotels, setHotels] = useState<HotelCardProps[]>([]);
   const [activities, setActivities] = useState<ActivityCardProps[]>([]);
   const [flights, setFlights] = useState<FlightCardProps[]>([]);
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [type, setType] = useState<PlanCard>("hotels");
 
   const addHotel = (hotel: HotelCardProps) =>
     setHotels((prev) => [...prev, hotel]);
@@ -49,6 +57,10 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         hotels,
         activities,
         flights,
+        modalVisibility,
+        type,
+        setType,
+        setModalVisibility,
         addHotel,
         addActivity,
         addFlight,
