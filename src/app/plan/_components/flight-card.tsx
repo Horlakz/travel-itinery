@@ -30,9 +30,9 @@ function FlightCard(props: FlightCardProps) {
   return (
     <CardLayout action={() => removeFlight(props.id)}>
       <div className="w-full divide-y-2 space-y-4 px-4 py-2">
-        <div className="flex md:flex-row flex-col justify-between gap-6">
-          <div className="w-full flex justify-between">
-            <div className="flex gap-3">
+        <div className="flex md:flex-row flex-col justify-between items-center gap-6">
+          <div className="w-2/5 flex justify-between">
+            <div className="flex gap-3 pr-2">
               <Image
                 src="/assets/american-airlines-symbolsvg.svg"
                 alt="american airlines symbols icon"
@@ -44,17 +44,19 @@ function FlightCard(props: FlightCardProps) {
 
                 <div className="flex items-center w-full">
                   <span className="text-text-black-secondary1">
-                    {props.code}
+                    {props.code.slice(0, 3).toUpperCase()}
                   </span>
                   <img src="/assets/dot.svg" alt="dot icon" />
-                  <button className="w-fit bg-midnightblue text-white text-xs p-2 rounded">
+                  <button className="w-32 bg-midnightblue text-white text-xs p-2 rounded">
                     {props.suite}
                   </button>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="flex flex-col gap-1">
+          <div className="w-full flex justify-between items-center gap-3">
+            <div className="w-full flex flex-col items-center gap-1">
               <p className="font-semibold text-2xl">
                 {formatDateTime(props.startTime)}
               </p>
@@ -62,39 +64,41 @@ function FlightCard(props: FlightCardProps) {
                 {formatDateDay(props.startTime)}
               </p>
             </div>
-          </div>
 
-          <div className="w-full">
-            <div className="w-full flex justify-between items-center">
-              <img
-                src="/assets/airplanetakeoff.svg"
-                alt="airplane take off icon"
-              />
-              <span className="text-text-black-secondary1">
-                Duration: {Math.floor(props.durationMins / 60)}h{" "}
-                {props.durationMins % 60}m
-              </span>
-              <img
-                src="/assets/airplanelanding.svg"
-                alt="airplane landing icon"
-              />
+            <div className="w-full">
+              <div className="w-full flex justify-between items-center">
+                <img
+                  src="/assets/airplanetakeoff.svg"
+                  alt="airplane take off icon"
+                />
+                <span className="text-text-black-secondary1">
+                  Duration: {Math.floor(props.durationMins / 60)}h{" "}
+                  {props.durationMins % 60}m
+                </span>
+                <img
+                  src="/assets/airplanelanding.svg"
+                  alt="airplane landing icon"
+                />
+              </div>
+
+              <progress
+                className="w-80 h-2 rounded-xl [&::-webkit-progress-bar]:rounded-lg [&::-moz-progress-bar]:rounded-lg"
+                value={50}
+                max={100}
+              ></progress>
+
+              <div className="w-full flex justify-between items-center">
+                <span className="uppercase font-medium">
+                  {props.from.slice(0, 3).toUpperCase()}
+                </span>
+                <span className="text-text-black-secondary1">Direct</span>
+                <span className="uppercase font-medium">
+                  {props.to.slice(0, 3).toUpperCase()}
+                </span>
+              </div>
             </div>
 
-            <progress
-              className="w-full h-2 rounded-xl [&::-webkit-progress-bar]:rounded-lg [&::-moz-progress-bar]:rounded-lg"
-              value={50}
-              max={100}
-            ></progress>
-
-            <div className="w-full flex justify-between items-center">
-              <span className="uppercase font-medium">{props.from}</span>
-              <span className="text-text-black-secondary1">Direct</span>
-              <span className="uppercase font-medium">{props.to}</span>
-            </div>
-          </div>
-
-          <div className="w-full flex justify-between items-center">
-            <div className="flex flex-col gap-1">
+            <div className="w-full flex flex-col items-center gap-1">
               <p className="font-semibold text-2xl">
                 {formatDateTime(endDate)}
               </p>
@@ -102,11 +106,11 @@ function FlightCard(props: FlightCardProps) {
                 {formatDateDay(endDate)}
               </p>
             </div>
-
-            <p className="text-text-black-primary font-semibold md:text-2xl lg:text-3xl text-xl">
-              &#8358; {props.price.toLocaleString()}
-            </p>
           </div>
+
+          <p className="w-1/3 text-text-black-primary text-right font-semibold md:text-2xl lg:text-3xl text-xl">
+            &#8358; {props.price.toLocaleString()}
+          </p>
         </div>
 
         <div className="text-text-black-secondary1 flex flex-wrap gap-2 pt-6">
