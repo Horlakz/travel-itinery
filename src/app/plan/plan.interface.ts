@@ -43,3 +43,5 @@ export interface ActivityCardProps {
   dayTag: string;
   imageUrl: string;
 }
+
+export type PlanCard = "flights" | "hotels" | "activities";

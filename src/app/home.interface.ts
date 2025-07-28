@@ -1,4 +1,5 @@
 import { JSX } from "react";
+import { PlanCard } from "./plan/plan.interface";
 
 export interface InfoCardTheme {
   bg: string;
@@ -8,13 +9,13 @@ export interface InfoCardTheme {
 }
 
 export interface InfoCardProps {
-  title: string;
+  title: PlanCard;
   description: string;
   theme: InfoCardTheme;
 }
 
 export interface ListLayoutProps<T> {
-  title: string;
+  title: PlanCard;
   icon: string;
   bgColor: string;
   btnTextColor?: string;
