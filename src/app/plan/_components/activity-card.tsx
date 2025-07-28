@@ -1,11 +1,14 @@
 import Image from "next/image";
 
+import { useGlobalContext } from "@/providers/global.context";
 import { ActivityCardProps } from "../plan.interface";
 import CardLayout from "./card-layout";
 
 function ActivityCard(props: ActivityCardProps) {
+  const { removeActivity } = useGlobalContext();
+
   return (
-    <CardLayout>
+    <CardLayout action={() => removeActivity(props.id)}>
       <div className="w-full flex items-center p-4">
         <div className="hidden md:block relative">
           <img

@@ -1,5 +1,6 @@
 "use client";
 
+import { useGlobalContext } from "@/providers/global.context";
 import Image from "next/image";
 import { FlightCardProps } from "../plan.interface";
 import CardLayout from "./card-layout";
@@ -24,8 +25,10 @@ function FlightCard(props: FlightCardProps) {
     new Date(props.startTime).getTime() + props.durationMins * 60000
   ).toISOString();
 
+  const { removeFlight } = useGlobalContext();
+
   return (
-    <CardLayout action={() => alert("Remove flight")}>
+    <CardLayout action={() => removeFlight(props.id)}>
       <div className="w-full divide-y-2 space-y-4 px-4 py-2">
         <div className="flex md:flex-row flex-col justify-between gap-6">
           <div className="w-full flex justify-between">

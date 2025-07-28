@@ -1,4 +1,26 @@
+import { useState } from "react";
+
+import { useGlobalContext } from "@/providers/global.context";
+import { generateId } from "../plan.constant";
+
 function FlightCreate() {
+  const { addFlight } = useGlobalContext();
+
+  const [form, setForm] = useState({
+    id: generateId(),
+    name: "",
+    code: "",
+    durationMins: 0,
+    suite: "",
+    startTime: "",
+    endTime: "",
+    price: 0,
+    loadWeightKg: 0,
+    cabinBaggageWeightKg: 0,
+    from: "",
+    to: "",
+  });
+
   return (
     <div className="p-6 w-full max-w-3xl bg-white rounded-2xl shadow-xl">
       <h2 className="text-2xl font-semibold mb-4">Add New Flight</h2>
@@ -15,6 +37,8 @@ function FlightCreate() {
               name="name"
               placeholder="e.g., American Airlines"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              value={form.name}
             />
           </div>
           <div className="w-full">
@@ -26,6 +50,8 @@ function FlightCreate() {
               name="code"
               placeholder="e.g., AA 233"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, code: e.target.value })}
+              value={form.code}
             />
           </div>
         </div>
@@ -38,6 +64,8 @@ function FlightCreate() {
           <select
             name="suite"
             className="w-full border border-gray-300 rounded-lg p-2.5"
+            onChange={(e) => setForm({ ...form, suite: e.target.value })}
+            value={form.suite}
           >
             <option value="">Select class</option>
             <option value="Economy">Economy</option>
@@ -57,6 +85,8 @@ function FlightCreate() {
               name="from"
               placeholder="e.g., LOS"
               className="w-full border border-gray-300 rounded-lg p-2.5 uppercase"
+              onChange={(e) => setForm({ ...form, from: e.target.value })}
+              value={form.from}
             />
           </div>
           <div className="w-full">
@@ -68,6 +98,8 @@ function FlightCreate() {
               name="to"
               placeholder="e.g., JFK"
               className="w-full border border-gray-300 rounded-lg p-2.5 uppercase"
+              onChange={(e) => setForm({ ...form, to: e.target.value })}
+              value={form.to}
             />
           </div>
         </div>
@@ -82,6 +114,8 @@ function FlightCreate() {
               type="datetime-local"
               name="startTime"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, startTime: e.target.value })}
+              value={form.startTime}
             />
           </div>
           <div className="w-full">
@@ -92,6 +126,8 @@ function FlightCreate() {
               type="datetime-local"
               name="endTime"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, endTime: e.target.value })}
+              value={form.endTime}
             />
           </div>
         </div>
@@ -106,6 +142,10 @@ function FlightCreate() {
             name="durationMins"
             placeholder="e.g., 380"
             className="w-full border border-gray-300 rounded-lg p-2.5"
+            onChange={(e) =>
+              setForm({ ...form, durationMins: +e.target.value })
+            }
+            value={form.durationMins}
           />
         </div>
 
@@ -119,6 +159,8 @@ function FlightCreate() {
             name="price"
             placeholder="e.g., 145000"
             className="w-full border border-gray-300 rounded-lg p-2.5"
+            onChange={(e) => setForm({ ...form, price: +e.target.value })}
+            value={form.price}
           />
         </div>
 
@@ -133,6 +175,10 @@ function FlightCreate() {
               name="loadWeightKg"
               placeholder="e.g., 25"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) =>
+                setForm({ ...form, loadWeightKg: +e.target.value })
+              }
+              value={form.loadWeightKg}
             />
           </div>
           <div className="w-full">
@@ -144,6 +190,10 @@ function FlightCreate() {
               name="cabinBaggageWeightKg"
               placeholder="e.g., 8"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) =>
+                setForm({ ...form, cabinBaggageWeightKg: +e.target.value })
+              }
+              value={form.cabinBaggageWeightKg}
             />
           </div>
         </div>
@@ -172,8 +222,12 @@ function FlightCreate() {
         {/* Submit */}
         <div className="flex justify-end pt-4">
           <button
-            type="submit"
+            type="button"
             className="bg-primary-600 text-white px-6 py-2.5 rounded-lg hover:bg-primary-700 transition"
+            onClick={(e) => {
+              e.preventDefault();
+              addFlight(form);
+            }}
           >
             Create Flight
           </button>

@@ -1,4 +1,29 @@
+import { useGlobalContext } from "@/providers/global.context";
+import { useState } from "react";
+import { generateId } from "../plan.constant";
+
 function HotelCreate() {
+  const { addHotel } = useGlobalContext();
+
+  const INITIAL_FORM = {
+    id: generateId(),
+    name: "",
+    address: "",
+    mapUrl: "",
+    rating: 0,
+    reviewsCount: 0,
+    roomType: "",
+    pricePerNight: 0,
+    totalPrice: 0,
+    nights: 1,
+    checkInDate: "",
+    checkOutDate: "",
+    facilities: [],
+    imageUrl: "",
+  };
+
+  const [form, setForm] = useState(INITIAL_FORM);
+
   return (
     <div className="p-6 w-full max-w-2xl bg-white rounded-2xl shadow-xl">
       <h2 className="text-2xl font-semibold mb-4">Add New Hotel</h2>
@@ -14,6 +39,8 @@ function HotelCreate() {
             name="name"
             placeholder="e.g., Riviera Resort"
             className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            value={form.name}
           />
         </div>
 
@@ -27,6 +54,8 @@ function HotelCreate() {
             rows={3}
             placeholder="Full hotel address"
             className="w-full border border-gray-300 rounded-lg p-2.5 resize-none focus:outline-none focus:ring-2 focus:ring-primary-600"
+            onChange={(e) => setForm({ ...form, address: e.target.value })}
+            value={form.address}
           />
         </div>
 
@@ -40,6 +69,8 @@ function HotelCreate() {
             name="mapUrl"
             placeholder="https://maps.google.com/..."
             className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+            onChange={(e) => setForm({ ...form, mapUrl: e.target.value })}
+            value={form.mapUrl}
           />
         </div>
 
@@ -57,6 +88,8 @@ function HotelCreate() {
               min="0"
               max="10"
               className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              onChange={(e) => setForm({ ...form, rating: +e.target.value })}
+              value={form.rating}
             />
           </div>
           <div className="w-full">
@@ -68,6 +101,8 @@ function HotelCreate() {
               name="roomType"
               placeholder="e.g., King size room"
               className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              onChange={(e) => setForm({ ...form, roomType: e.target.value })}
+              value={form.roomType}
             />
           </div>
         </div>
@@ -108,6 +143,10 @@ function HotelCreate() {
               name="price"
               placeholder="e.g., 123450"
               className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              onChange={(e) =>
+                setForm({ ...form, pricePerNight: +e.target.value })
+              }
+              value={form.pricePerNight}
             />
           </div>
           <div className="w-full">
@@ -119,6 +158,10 @@ function HotelCreate() {
               name="totalPrice"
               placeholder="e.g., 560000"
               className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              onChange={(e) =>
+                setForm({ ...form, totalPrice: +e.target.value })
+              }
+              value={form.totalPrice}
             />
           </div>
         </div>
@@ -133,6 +176,10 @@ function HotelCreate() {
               type="date"
               name="checkIn"
               className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              onChange={(e) =>
+                setForm({ ...form, checkInDate: e.target.value })
+              }
+              value={form.checkInDate}
             />
           </div>
           <div className="w-full">
@@ -143,6 +190,10 @@ function HotelCreate() {
               type="date"
               name="checkOut"
               className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              onChange={(e) =>
+                setForm({ ...form, checkOutDate: e.target.value })
+              }
+              value={form.checkOutDate}
             />
           </div>
         </div>
@@ -150,8 +201,13 @@ function HotelCreate() {
         {/* Submit Button */}
         <div className="flex justify-end mt-6">
           <button
-            type="submit"
+            type="button"
             className="bg-primary-600 text-white px-6 py-2.5 rounded-lg hover:bg-primary-700 transition"
+            onClick={(e) => {
+              e.preventDefault();
+              addHotel(form);
+              setForm(INITIAL_FORM);
+            }}
           >
             Create Hotel
           </button>

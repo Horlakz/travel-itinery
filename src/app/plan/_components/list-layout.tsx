@@ -10,7 +10,7 @@ import { ListLayoutProps } from "../../home.interface";
 import ActivitiesEmptyIcon from "../_icons/activity-empty";
 import FlightEmptyIcon from "../_icons/flight-empty";
 import HotelEmptyIcon from "../_icons/hotel-empty";
-import { createCompnents } from "../plan.constant";
+import { createComponents } from "../plan.constant";
 import HotelCreate from "./hotel-create";
 
 const emptyIcons: Record<"activities" | "hotels" | "flights", JSX.Element> = {
@@ -83,8 +83,8 @@ function ListLayout<T>(props: ListLayoutProps<T>) {
       >
         {(() => {
           const Component =
-            createCompnents[
-              props.title.toLowerCase() as keyof typeof createCompnents
+            createComponents[
+              props.title.toLowerCase() as keyof typeof createComponents
             ] ?? HotelCreate;
           return <Component />;
         })()}

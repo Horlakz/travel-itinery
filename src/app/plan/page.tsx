@@ -6,11 +6,14 @@ import InfoCard from "@/app/plan/_components/info-card";
 import ListLayout from "@/app/plan/_components/list-layout";
 import { ArrowLeftIcon } from "@/components/icons/arrow-left";
 import { Button } from "@/components/ui/button";
+import { useGlobalContext } from "@/providers/global.context";
 import Image from "next/image";
 import ActivityCard from "./_components/activity-card";
 import FlightCard from "./_components/flight-card";
 
 function PlanPage() {
+  const { hotels, activities, flights } = useGlobalContext();
+
   return (
     <>
       <div className="w-full bg-white p-4">
@@ -92,21 +95,8 @@ function PlanPage() {
           href="/flights"
           icon="/assets/airplaneinflight.svg"
           bgColor="bg-neutral-300"
-          data={[
-            {
-              name: "Flight to NYC",
-              code: "NYC123",
-              durationMins: 300,
-              suite: "Economy",
-              startTime: "2023-10-01T10:00:00Z",
-              price: 145000,
-              loadWeightKg: 25,
-              cabinBaggageWeightKg: 8,
-              from: "LAX",
-              to: "JFK",
-            },
-          ]}
           btnTextColor="text-primary-600"
+          data={flights}
           listItem={(data) => <FlightCard {...data} />}
         />
 
@@ -115,24 +105,9 @@ function PlanPage() {
           href="/hotels"
           icon="/assets/warehouse.svg"
           bgColor="bg-neutral-900"
-          data={[
-            {
-              name: "Hotel California",
-              address: "123 Sunset Blvd, Los Angeles, CA",
-              rating: 4.5,
-              reviewsCount: 120,
-              roomType: "Deluxe Suite",
-              pricePerNight: 20000,
-              totalPrice: 60000,
-              nights: 3,
-              checkInDate: "2023-10-01T15:00:00Z",
-              checkOutDate: "2023-10-04T11:00:00Z",
-              facilities: ["Free WiFi", "Pool", "Gym"],
-              imageUrl: "/assets/hotel.jpg",
-            },
-          ]}
+          btnTextColor="text-black"
+          data={hotels}
           listItem={(data) => <HotelCard {...data} />}
-          btnTextColor="text-white"
         />
 
         <ListLayout
@@ -140,21 +115,7 @@ function PlanPage() {
           href="/activities"
           icon="/assets/roadhorizon-1.svg"
           bgColor="bg-primary-700"
-          data={[
-            {
-              title: "Museum Tour",
-              description: "Explore the art and history of the city.",
-              mapUrl: "https://maps.google.com",
-              rating: 4.8,
-              reviewsCount: 200,
-              duration: "2 hours",
-              whatsIncluded: ["Guided Tour", "Entry Ticket"],
-              startTime: "2023-10-01T09:00:00Z",
-              price: 5000,
-              dayTag: "Day 1",
-              imageUrl: "/assets/activity.jpg",
-            },
-          ]}
+          data={activities}
           btnTextColor="text-primary-600"
           listItem={(data) => <ActivityCard {...data} />}
         />

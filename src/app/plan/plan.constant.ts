@@ -8,8 +8,12 @@ export const tripBuddies = [
   { name: "John Doe", image: "/assets/2@2x.png" },
 ];
 
-export const createCompnents = {
+export const createComponents = {
   hotels: HotelCreate,
-  activites: ActivityCreate,
+  activities: ActivityCreate,
   flights: FlightCreate,
 };
+
+export function generateId() {
+  return `id-${Math.random().toString(36).substr(2, 9)}`;
+}

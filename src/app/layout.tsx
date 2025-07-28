@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 import Wrapper from "@/app/_components/wrapper";
+import { GlobalProvider } from "@/providers/global.context";
 import "@/styles/globals.css";
 
 const poppins = Poppins({
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Wrapper>{children}</Wrapper>
+        <GlobalProvider>
+          <Wrapper>{children}</Wrapper>
+        </GlobalProvider>
         <Toaster />
       </body>
     </html>

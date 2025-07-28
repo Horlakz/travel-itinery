@@ -1,10 +1,13 @@
+import { useGlobalContext } from "@/providers/global.context";
 import Image from "next/image";
 import { HotelCardProps } from "../plan.interface";
 import CardLayout from "./card-layout";
 
 function HotelCard(props: HotelCardProps) {
+  const { removeHotel } = useGlobalContext();
+
   return (
-    <CardLayout>
+    <CardLayout action={() => removeHotel(props.id)}>
       <div className="w-full flex items-center p-4">
         <div className="hidden md:block relative">
           <img

@@ -1,4 +1,5 @@
 export interface FlightCardProps {
+  id: string;
   name: string;
   code: string;
   durationMins: number;
@@ -12,6 +13,7 @@ export interface FlightCardProps {
 }
 
 export interface HotelCardProps {
+  id: string;
   name: string;
   address: string;
   mapUrl?: string;
@@ -28,6 +30,7 @@ export interface HotelCardProps {
 }
 
 export interface ActivityCardProps {
+  id: string;
   title: string;
   description: string;
   mapUrl?: string;

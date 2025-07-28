@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { Modal } from "@/components/ui/modal";
 import { useState } from "react";
 import { InfoCardProps } from "../../home.interface";
-import { createCompnents } from "../plan.constant";
+import { createComponents } from "../plan.constant";
 import HotelCreate from "./hotel-create";
 
 function InfoCard(props: InfoCardProps) {
@@ -40,8 +40,8 @@ function InfoCard(props: InfoCardProps) {
       >
         {(() => {
           const Component =
-            createCompnents[
-              props.title.toLowerCase() as keyof typeof createCompnents
+            createComponents[
+              props.title.toLowerCase() as keyof typeof createComponents
             ] ?? HotelCreate;
           return <Component />;
         })()}

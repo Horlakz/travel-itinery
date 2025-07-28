@@ -1,4 +1,29 @@
+import { useGlobalContext } from "@/providers/global.context";
+import { useState } from "react";
+import { generateId } from "../plan.constant";
+
 function ActivityCreate() {
+  const { addActivity } = useGlobalContext();
+
+  const INITIAL_FORM = {
+    id: generateId(),
+    title: "",
+    description: "",
+    location: "",
+    mapUrl: "",
+    rating: 0,
+    duration: "",
+    inclusions: "",
+    price: 0,
+    startTime: "",
+    dayTag: "",
+    imageUrl: "",
+    reviewsCount: 0,
+    whatsIncluded: [],
+  };
+
+  const [form, setForm] = useState(INITIAL_FORM);
+
   return (
     <div className="p-6 w-full max-w-2xl bg-white rounded-2xl shadow-xl">
       <h2 className="text-2xl font-semibold mb-4">Add New Activity</h2>
@@ -14,6 +39,8 @@ function ActivityCreate() {
             name="title"
             placeholder="e.g., The Museum of Modern Art"
             className="w-full border border-gray-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-primary-600"
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+            value={form.title}
           />
         </div>
 
@@ -27,6 +54,8 @@ function ActivityCreate() {
             rows={3}
             placeholder="Brief description of the activity"
             className="w-full border border-gray-300 rounded-lg p-2.5 resize-none focus:outline-none focus:ring-2 focus:ring-primary-600"
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            value={form.description}
           />
         </div>
 
@@ -41,6 +70,8 @@ function ActivityCreate() {
               name="location"
               placeholder="e.g., Manhattan, NYC"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, location: e.target.value })}
+              value={form.location}
             />
           </div>
           <div className="w-full">
@@ -52,6 +83,8 @@ function ActivityCreate() {
               name="mapUrl"
               placeholder="https://maps.google.com/..."
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, mapUrl: e.target.value })}
+              value={form.mapUrl}
             />
           </div>
         </div>
@@ -68,6 +101,8 @@ function ActivityCreate() {
               step="0.1"
               placeholder="e.g., 4.5"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, rating: +e.target.value })}
+              value={form.rating}
             />
           </div>
           <div className="w-full">
@@ -79,6 +114,8 @@ function ActivityCreate() {
               name="duration"
               placeholder="e.g., 1 Hour"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, duration: e.target.value })}
+              value={form.duration}
             />
           </div>
         </div>
@@ -93,6 +130,8 @@ function ActivityCreate() {
             rows={2}
             placeholder="e.g., Admission to the Empire State Building"
             className="w-full border border-gray-300 rounded-lg p-2.5"
+            onChange={(e) => setForm({ ...form, inclusions: e.target.value })}
+            value={form.inclusions}
           />
         </div>
 
@@ -107,6 +146,8 @@ function ActivityCreate() {
               name="price"
               placeholder="e.g., 123450"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, price: +e.target.value })}
+              value={form.price}
             />
           </div>
           <div className="w-full">
@@ -117,6 +158,8 @@ function ActivityCreate() {
               type="datetime-local"
               name="startTime"
               className="w-full border border-gray-300 rounded-lg p-2.5"
+              onChange={(e) => setForm({ ...form, startTime: e.target.value })}
+              value={form.startTime}
             />
           </div>
         </div>
@@ -129,6 +172,8 @@ function ActivityCreate() {
           <select
             name="day"
             className="w-full border border-gray-300 rounded-lg p-2.5"
+            onChange={(e) => setForm({ ...form, dayTag: e.target.value })}
+            value={form.dayTag}
           >
             <option value="">Select Day</option>
             <option value="Day 1">Day 1</option>
@@ -141,8 +186,13 @@ function ActivityCreate() {
         {/* Submit */}
         <div className="flex justify-end pt-4">
           <button
-            type="submit"
+            type="button"
             className="bg-primary-600 text-white px-6 py-2.5 rounded-lg hover:bg-primary-700 transition"
+            onClick={(e) => {
+              e.preventDefault();
+              addActivity(form);
+              setForm(INITIAL_FORM);
+            }}
           >
             Create Activity
           </button>
