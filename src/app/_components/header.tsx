@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { headerItems } from "../home/home.constant";
-import Search from "../home/search";
+import { headerItems } from "../home.constant";
+import Search from "../plan/_components/search";
 import HeaderItem from "./header-item";
 
 function Header() {

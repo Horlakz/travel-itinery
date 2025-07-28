@@ -1,6 +1,6 @@
 "use client";
 
-import { navitems } from "../home/home.constant";
+import { navitems } from "../home.constant";
 
 function NavBar() {
   return (

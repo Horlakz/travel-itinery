@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { FlightCardProps } from "../plan.interface";
 import CardLayout from "./card-layout";
-import { FlightCardProps } from "./home.interface";
 
 function formatDateTime(date: string) {
   return new Date(date).toLocaleTimeString("en-US", {
@@ -29,10 +30,11 @@ function FlightCard(props: FlightCardProps) {
         <div className="flex md:flex-row flex-col justify-between gap-6">
           <div className="w-full flex justify-between">
             <div className="flex gap-3">
-              <img
+              <Image
                 src="/assets/american-airlines-symbolsvg.svg"
                 alt="american airlines symbols icon"
                 width={20}
+                height={20}
               />
               <div className="flex flex-col items-start">
                 <p className="text-xl font-semibold">{props.name}</p>

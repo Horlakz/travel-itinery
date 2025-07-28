@@ -1,13 +1,13 @@
 "use client";
 
-import BasketIcon from "../icons/basket";
-import BellIcon from "../icons/bell";
-import ChartPieSliceIcon from "../icons/chart-pie-slice";
-import HandCoins from "../icons/handcoins";
-import HouseIcon from "../icons/house";
-import ListChecksIcon from "../icons/listchecks";
-import PlusSquareIcon from "../icons/plus-square";
-import WalletIcon from "../icons/wallet";
+import BasketIcon from "../components/icons/basket";
+import BellIcon from "../components/icons/bell";
+import ChartPieSliceIcon from "../components/icons/chart-pie-slice";
+import HandCoins from "../components/icons/handcoins";
+import HouseIcon from "../components/icons/house";
+import ListChecksIcon from "../components/icons/listchecks";
+import PlusSquareIcon from "../components/icons/plus-square";
+import WalletIcon from "../components/icons/wallet";
 
 export const headerItems = [
   { name: "Home", route: "/", icon: HouseIcon },
@@ -33,10 +33,4 @@ export const navitems = [
   { name: "Immigration", icon: "/assets/suitcaserolling.svg" },
   { name: "Medical", icon: "/assets/firstaidkit.svg" },
   { name: "Vacation Packages", icon: "/assets/package.svg" },
-];
-
-export const tripBuddies = [
-  { name: "Jane Doe", image: "/assets/1@2x.png" },
-  { name: "John Doe", image: "/assets/1-1@2x.png" },
-  { name: "John Doe", image: "/assets/2@2x.png" },
 ];

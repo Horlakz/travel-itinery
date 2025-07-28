@@ -1,6 +1,9 @@
+import Image from "next/image";
+
+import { ActivityCardProps } from "../plan.interface";
 import CardLayout from "./card-layout";
 
-function ActivityCard() {
+function ActivityCard(props: ActivityCardProps) {
   return (
     <CardLayout>
       <div className="w-full flex items-center p-4">
@@ -15,7 +18,7 @@ function ActivityCard() {
             alt="caret circle icon"
             className="absolute right-2 top-1/2 -translate-y-1/2"
           />
-          <img
+          <Image
             src="/assets/rectangle-3437@2x.png"
             alt="hotel image"
             width={230}
@@ -26,25 +29,43 @@ function ActivityCard() {
         <div className="w-full h-full flex flex-col justify-between px-2 py-1 ">
           <div className="flex md:flex-row flex-col justify-between items-start">
             <div className="md:w-3/5">
-              <p className="text-xl font-semibold">The Museum of Modern Art</p>
+              <p className="text-xl font-semibold">{props.title}</p>
               <p className="font-medium text-text-black-primary">
-                Works from Van Gogh to Warhol & beyond plus a sculpture garden,
-                2 cafes & The modern restaurant
+                {props.description}
               </p>
               <div className="flex gap-1.5">
                 <img src="/assets/mappin.svg" alt="map pin icon" />
                 <span className="text-primary-600">Directions</span>
 
                 <img src="/assets/star.svg" alt="star icon" />
-                <span className="text-text-black-secondary1">4.5 (436)</span>
+                <span className="text-text-black-secondary1">
+                  {props.rating} ({props.reviewsCount})
+                </span>
 
                 <img src="/assets/clock.svg" alt="bed icon" />
-                <span>1 Hour</span>
+                <span>{props.duration}</span>
               </div>
             </div>
             <div className="text-text-black-primary w-fit flex flex-col items-end">
-              <p className="font-semibold text-3xl">&#8358; 123, 450.00</p>
-              <p className="font-medium">10:30 AM on Mar 19</p>
+              <p className="font-semibold text-3xl">&#8358; {props.price}</p>
+              {props.startTime && (
+                <span>
+                  {new Date(props.startTime)
+                    .toLocaleString("en-US", {
+                      hour: "numeric",
+                      minute: undefined,
+                      hour12: true,
+                      month: "long",
+                      day: "numeric",
+                    })
+                    .replace(/:00 /, " ")
+                    .replace(/(\d+)(am|pm)/, "$1$2")
+                    .replace(
+                      /(\w+) (\d+),/,
+                      (_, month, day) => `${month.toLowerCase()} ${day}`
+                    )}
+                </span>
+              )}
             </div>
           </div>
 

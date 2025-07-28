@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
-import Wrapper from "@/components/layout/wrapper";
+import Wrapper from "@/app/_components/wrapper";
 import "@/styles/globals.css";
 
 const poppins = Poppins({
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <Wrapper>{children}</Wrapper>
+        <Toaster />
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ export interface InfoCardProps {
   theme: InfoCardTheme;
 }
 
-export interface ListLayoutProps<T = unknown> {
+export interface ListLayoutProps<T> {
   title: string;
   icon: string;
   bgColor: string;
@@ -21,17 +21,4 @@ export interface ListLayoutProps<T = unknown> {
   data: T[];
   listItem: (data: T) => JSX.Element;
   href: string;
-}
-
-export interface FlightCardProps {
-  name: string;
-  code: string;
-  durationMins: number;
-  suite: string;
-  startTime: string;
-  price: number;
-  loadWeightKg: number;
-  cabinBaggageWeightKg: number;
-  from: string;
-  to: string;
 }
